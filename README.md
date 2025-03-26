@@ -13,11 +13,16 @@
 11. Buscar la provincia más pequeña.
 
 ## queries_2023    
-1. Mostrar los equipos de la ciudad de Mendoza
+1. Mostrar los equipos de la ciudad de Mendoza.
 SELECT nombre FROM equipos WHERE ciudad = "Mendoza";
 
-2. Mostrar el equipo mas antiguo. Indicar nombre y fundacion
+2. Mostrar el equipo mas antiguo. Indicar nombre y fundacion.
 SELECT nombre, fecha_fund FROM equipos ORDER BY fecha_fund ASC LIMIT 1;
 
-3. Mostrar los nombres de todas las materias de quinto automotores
+3. Mostrar los nombres de todas las materias de quinto automotores.
 SELECT nombre FROM materias WHERE curso = 5;
+
+4. Buscar las capitales de provs donde el gobernador se llama "Juan" o tengan mas de 3 millones de habitantes.
+SELECT capital FROM provincias WHERE gobernador = "Juan" OR poblacion > 3000000;
+
+   
