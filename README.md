@@ -11,3 +11,13 @@
 9. Buscar los gobernadores que tengan apellido que comience con "K".
 10. Listar las provincias y ordenarlas por cantidad de habitantes.
 11. Buscar la provincia más pequeña.
+
+## queries_2023    
+1. Mostrar los equipos de la ciudad de Mendoza
+SELECT nombre FROM equipos WHERE ciudad = "Mendoza";
+
+2. Mostrar el equipo mas antiguo. Indicar nombre y fundacion
+SELECT nombre, fecha_fund FROM equipos ORDER BY fecha_fund ASC LIMIT 1;
+
+3. Mostrar los nombres de todas las materias de quinto automotores
+SELECT nombre FROM materias WHERE curso = 5;
