@@ -247,7 +247,179 @@ SELECT nombre, superficie, (superficie * 100) / 2780403 AS Porcentaje_Superficie
 | Buenos Aires                                          |     307571 |                     11.0621 |
 +-------------------------------------------------------+------------+-----------------------------+
 
+/* 29. Listar las provincias autónomas desde el siglo XIX.*/
+SELECT nombre, autonoma_desde FROM provincias WHERE autonoma_desde BETWEEN '1800-01-01' AND '1899-12-31' ;
++---------------------+----------------+
+| nombre              | autonoma_desde |
++---------------------+----------------+
+| Buenos Aires        | 1820-02-11     |
+| Catamarca           | 1821-08-25     |
+| Cordoba             | 1820-01-05     |
+| Corrientes          | 1814-04-20     |
+| Entre Rios          | 1814-04-23     |
+| Jujuy               | 1836-12-17     |
+| La Rioja            | 1820-03-01     |
+| Mendoza             | 1820-03-01     |
+| Salta               | 1836-12-17     |
+| San Juan            | 1820-03-01     |
+| San Luis            | 1820-03-01     |
+| Santa Fe            | 1816-05-10     |
+| Santiago del Estero | 1820-04-27     |
+| Tucuman             | 1825-11-25     |
++---------------------+----------------+
 
+/* 30.Contar la cantidad de provincias.*/
+SELECT COUNT(nombre) AS cantidad_de_provincias FROM provincias;
++------------------------+
+| cantidad_de_provincias |
++------------------------+
+|                     24 |
++------------------------+
 
+/* 31. ¿Cuántos gobernadores llamados Gustavo hay?.*/
+SELECT COUNT(gobernador) AS Contador FROM provincias WHERE gobernador LIKE "Gustavo%";
++----------+
+| Contador |
++----------+
+|        4 |
++----------+
 
+/*32. ¿Cuáles son las capitales de las provincias de Cuyo?*/ 
+SELECT capital FROM provincias WHERE nombre IN( "Mendoza", "San Juan","San Luis");
++----------+
+| capital  |
++----------+
+| Mendoza  |
+| San Juan |
+| San Luis |
++----------+
 
+/* 33. Dar una lista con todas las provincias indicando hace cuantos años son autónomas.*/
+SELECT nombre, autonoma_desde FROM provincias;
++-------------------------------------------------------+----------------+
+| nombre                                                | autonoma_desde |
++-------------------------------------------------------+----------------+
+| Buenos Aires                                          | 1820-02-11     |
+| Catamarca                                             | 1821-08-25     |
+| Chaco                                                 | 1951-08-08     |
+| Chubut                                                | 1955-06-15     |
+| Cordoba                                               | 1820-01-05     |
+| Corrientes                                            | 1814-04-20     |
+| Entre Rios                                            | 1814-04-23     |
+| Formosa                                               | 1955-06-15     |
+| Jujuy                                                 | 1836-12-17     |
+| La Pampa                                              | 1951-08-08     |
+| La Rioja                                              | 1820-03-01     |
+| Mendoza                                               | 1820-03-01     |
+| Misiones                                              | 1953-12-10     |
+| Neuquen                                               | 1955-06-15     |
+| Rio Negro                                             | 1955-06-15     |
+| Salta                                                 | 1836-12-17     |
+| San Juan                                              | 1820-03-01     |
+| San Luis                                              | 1820-03-01     |
+| Santa Cruz                                            | 1956-11-22     |
+| Santa Fe                                              | 1816-05-10     |
+| Santiago del Estero                                   | 1820-04-27     |
+| Tierra del Fuego, Antartida e Islas del Atlantico Sur | 1990-04-26     |
+| Tucuman                                               | 1825-11-25     |
+| Ciudad Autonoma de Buenos Aires                       | 1536-02-02     |
++-------------------------------------------------------+----------------+
+
+/*34. Listar las 23 provincias de la Argentina anteponiendo ”Provincia de ”. Por ejemplo en vez de escribir ”Buenos
+Aires” debe decir ”Provincia de Buenos Aires”.*/
+SELECT CONCAT ('Provincia de ',nombre) AS nombre FROM provincias;
++--------------------------------------------------------------------+
+| nombre                                                             |
++--------------------------------------------------------------------+
+| Provincia de Buenos Aires                                          |
+| Provincia de Catamarca                                             |
+| Provincia de Chaco                                                 |
+| Provincia de Chubut                                                |
+| Provincia de Cordoba                                               |
+| Provincia de Corrientes                                            |
+| Provincia de Entre Rios                                            |
+| Provincia de Formosa                                               |
+| Provincia de Jujuy                                                 |
+| Provincia de La Pampa                                              |
+| Provincia de La Rioja                                              |
+| Provincia de Mendoza                                               |
+| Provincia de Misiones                                              |
+| Provincia de Neuquen                                               |
+| Provincia de Rio Negro                                             |
+| Provincia de Salta                                                 |
+| Provincia de San Juan                                              |
+| Provincia de San Luis                                              |
+| Provincia de Santa Cruz                                            |
+| Provincia de Santa Fe                                              |
+| Provincia de Santiago del Estero                                   |
+| Provincia de Tierra del Fuego, Antartida e Islas del Atlantico Sur |
+| Provincia de Tucuman                                               |
+| Provincia de Ciudad Autonoma de Buenos Aires                       |
++--------------------------------------------------------------------+
+
+/* 35. ¿Cuál es la provincia más poblada de la Patagonia?*/
+SELECT nombre, poblacion FROM provincias WHERE nombre IN ("La Pampa","Rio Negro","Chubut","Santa Cruz","Neuquen","Tierra del Fuego") ORDER BY poblacion DESC LIMIT 1;
++-----------+-----------+
+| nombre    | poblacion |
++-----------+-----------+
+| Rio Negro |    747610 |
++-----------+-----------+
+
+/*36. Buscar las capitales donde el gobernador se llama ”Juan” o de provincias con más de 3 millones de habitantes.*/
+SELECT capital, gobernador, poblacion FROM provincias WHERE gobernador LIKE "Juan%" OR poblacion > 3000000;
++-----------------------+---------------------------+-----------+
+| capital               | gobernador                | poblacion |
++-----------------------+---------------------------+-----------+
+| La Plata              | Axel Kicillof             |  17541141 |
+| Cordoba               | Juan Schiaretti           |   3760450 |
+| Santa Fe              | Omar Perotti              |   3536418 |
+| San Miguel de Tucuman | Juan Luis Manzur          |   1694656 |
+| NULL                  | Horacio Rodriguez Larreta |   3075646 |
++-----------------------+---------------------------+-----------+
+
+/* 37. Listar las provincias poniendo por ejemplo, para Buenos Aires: ”En Buenos Aires gobierna Axel Kicillof y la
+capital es La Plata”.*/
+SELECT CONCAT('En ',nombre,' gobierna ',gobernador,' y la capital es ',capital) AS LISTADO FROM provincias WHERE nombre NOT LIKE "Ciudad%";
++-----------------------------------------------------------------------------------------------------------+
+| LISTADO                                                                                                   |
++-----------------------------------------------------------------------------------------------------------+
+| En Buenos Aires gobierna Axel Kicillof y la capital es La Plata                                           |
+| En Catamarca gobierna Raul Jalil y la capital es San Fernando del Valle de Catamarca                      |
+| En Chaco gobierna Jorge Capitanich y la capital es Resistencia                                            |
+| En Chubut gobierna Mariano Arcioni y la capital es Rawson                                                 |
+| En Cordoba gobierna Juan Schiaretti y la capital es Cordoba                                               |
+| En Corrientes gobierna Gustavo Valdes y la capital es Corrientes                                          |
+| En Entre Rios gobierna Gustavo Border y la capital es Parana                                              |
+| En Formosa gobierna Gildo Insfran y la capital es Formosa                                                 |
+| En Jujuy gobierna Gerardo Morales y la capital es San Salvador de Jujuy                                   |
+| En La Pampa gobierna Carlos Verna y la capital es Santa Rosa                                              |
+| En La Rioja gobierna Ricardo Quintela y la capital es La Rioja                                            |
+| En Mendoza gobierna Rodolfo Suarez y la capital es Mendoza                                                |
+| En Misiones gobierna Oscar Herrera Ahuad y la capital es Posadas                                          |
+| En Neuquen gobierna Omar Gutierrez y la capital es Neuquen                                                |
+| En Rio Negro gobierna Arabela Carreras y la capital es Viedma                                             |
+| En Salta gobierna Gustavo Saenz y la capital es Salta                                                     |
+| En San Juan gobierna Sergio U?ac y la capital es San Juan                                                 |
+| En San Luis gobierna Alberto Rodriguez Saa y la capital es San Luis                                       |
+| En Santa Cruz gobierna Alicia Kirchner y la capital es Rio Gallegos                                       |
+| En Santa Fe gobierna Omar Perotti y la capital es Santa Fe                                                |
+| En Santiago del Estero gobierna Gerardo Zamora y la capital es Santiago del Estero                        |
+| En Tierra del Fuego, Antartida e Islas del Atlantico Sur gobierna Gustavo Melella y la capital es Ushuaia |
+| En Tucuman gobierna Juan Luis Manzur y la capital es San Miguel de Tucuman                                |
++-----------------------------------------------------------------------------------------------------------+
+
+/* 38. Mostrar los equipos de la ciudad de Mendoza.*/
+SELECT nombre, ciudad FROM equipos WHERE ciudad = 'Mendoza';
+
+/*39. Mostrar el equipo más antiguo indicando nombre y fecha de fundación.*/
+SELECT nombre, fecha_fund FROM equipos ORDER BY fecha_fund ASC LIMIT 1;
++----------+------------+
+| nombre   | fecha_fund |
++----------+------------+
+| Gimnasia | 1887-06-03 |
++----------+------------+
+
+/* 40. Mostrar nombre de equipo y estadio para los equipos cuyo estadio contenga “Armando” en el nombre.*/
+SELECT nombre, estadio FROM equipos WHERE estadio LIKE "%Armando%";
+
+/* 41.Mostrar la fila correspondiente a la materia con id 4. */
