@@ -1,4 +1,4 @@
-/*1. Buscar el gobernador de Neuquén */
+/*13. Buscar el gobernador de Neuquén */
 SELECT gobernador,nombre FROM provincias WHERE nombre LIKE "Neuquen";
 +----------------+---------+
 | gobernador     | nombre  |
@@ -6,7 +6,7 @@ SELECT gobernador,nombre FROM provincias WHERE nombre LIKE "Neuquen";
 | Omar Gutierrez | Neuquen |
 +----------------+---------+
 
-/*2. Buscar la capital de Misiones */
+/*14. Buscar la capital de Misiones */
 SELECT capital FROM provincias WHERE nombre = "Misiones";
 +---------+
 | capital |
@@ -14,7 +14,7 @@ SELECT capital FROM provincias WHERE nombre = "Misiones";
 | Posadas |
 +---------+
 
-/*3. Dar una lista de todas las provincias con más de un millón de habitantes*/
+/*15. Dar una lista de todas las provincias con más de un millón de habitantes*/
 SELECT nombre FROM provincias WHERE poblacion > 1000000;
 +---------------------------------+
 | nombre                          |
@@ -32,7 +32,7 @@ SELECT nombre FROM provincias WHERE poblacion > 1000000;
 | Ciudad Autonoma de Buenos Aires |
 +---------------------------------+
 
-/*4. Dar una lista de todas las provincias con su densidad de población.  */
+/*16. Dar una lista de todas las provincias con su densidad de población.  */
 SELECT nombre, poblacion/superficie AS densidad FROM provincias;
 +-------------------------------------------------------+------------+
 | nombre                                                | densidad   |
@@ -63,14 +63,14 @@ SELECT nombre, poblacion/superficie AS densidad FROM provincias;
 | Ciudad Autonoma de Buenos Aires                       | 15150.9655 |
 +-------------------------------------------------------+------------+
 
-/*5. ¿De qué provincia es gobernador Omar Perotti? */
+/*17. ¿De qué provincia es gobernador Omar Perotti? */
 SELECT nombre FROM provincias WHERE gobernador LIKE "Omar Perotti";
 +----------+
 | nombre   |
 +----------+
 | Santa Fe |
 
-/*6 Listar solamente las provincias, sin incluir la Ciudad Autónoma de Buenos Aires.*/
+/*18 Listar solamente las provincias, sin incluir la Ciudad Autónoma de Buenos Aires.*/
 SELECT nombre FROM provincias WHERE nombre NOT LIKE "Ciudad%";
 +-------------------------------------------------------+
 | nombre                                                |
@@ -100,7 +100,7 @@ SELECT nombre FROM provincias WHERE nombre NOT LIKE "Ciudad%";
 | Tucuman                                               |
 +-------------------------------------------------------+
 
-/* 7. Buscar las provincias que empiecen con ”San” o ”Santa”. */
+/* 19. Buscar las provincias que empiecen con ”San” o ”Santa”. */
 SELECT nombre FROM provincias WHERE nombre LIKE "San%" OR nombre LIKE "Santa%";
 +---------------------+
 | nombre              |
@@ -112,7 +112,7 @@ SELECT nombre FROM provincias WHERE nombre LIKE "San%" OR nombre LIKE "Santa%";
 | Santiago del Estero |
 +---------------------+
 
-/* 8. Buscar las provincias que tengan entre 100000 y 200000 kilómetros cuadrados */
+/* 20. Buscar las provincias que tengan entre 100000 y 200000 kilómetros cuadrados */
 SELECT nombre FROM provincias WHERE superficie BETWEEN  100000 AND 200000;
 +---------------------+
 | nombre              |
@@ -126,7 +126,7 @@ SELECT nombre FROM provincias WHERE superficie BETWEEN  100000 AND 200000;
 | Santiago del Estero |
 +---------------------+
 
-/* 9. Buscar los gobernadores que tengan apellido que comience con ”K”  */
+/* 21. Buscar los gobernadores que tengan apellido que comience con ”K”  */
 SELECT gobernador FROM provincias WHERE gobernador LIKE "%k%";
 +-----------------+
 | gobernador      |
@@ -135,7 +135,7 @@ SELECT gobernador FROM provincias WHERE gobernador LIKE "%k%";
 | Alicia Kirchner |
 +-----------------+
 
-/*10. Listar las provincias y ordenarlas por cantidad de habitantes.*/
+/*22. Listar las provincias y ordenarlas por cantidad de habitantes.*/
 SELECT nombre FROM provincias ORDER BY poblacion DESC;
 +-------------------------------------------------------+
 | nombre                                                |
@@ -166,7 +166,7 @@ SELECT nombre FROM provincias ORDER BY poblacion DESC;
 | Tierra del Fuego, Antartida e Islas del Atlantico Sur |
 +-------------------------------------------------------+
 
-/*11 . Buscar la provincia más pequeña */
+/*23 . Buscar la provincia más pequeña */
 SELECT nombre FROM provincias WHERE nombre NOT LIKE "Ciudad%" ORDER BY superficie ASC LIMIT 1;
 +-------------------------------------------------------+
 | nombre                                                |
@@ -174,7 +174,7 @@ SELECT nombre FROM provincias WHERE nombre NOT LIKE "Ciudad%" ORDER BY superfici
 | Tierra del Fuego, Antartida e Islas del Atlantico Sur |
 +-------------------------------------------------------+
 
-/*12. Buscar las provincias cuya capital se llame igual que la provincia */
+/*24. Buscar las provincias cuya capital se llame igual que la provincia */
 SELECT nombre, capital FROM provincias WHERE capital=nombre;
 +---------------------+---------------------+
 | nombre              | capital             |
@@ -192,7 +192,7 @@ SELECT nombre, capital FROM provincias WHERE capital=nombre;
 | Santiago del Estero | Santiago del Estero |
 +---------------------+---------------------+
 
-/*13. Buscar la provincia más joven */
+/*25. Buscar la provincia más joven */
 SELECT nombre, autonoma_desde FROM provincias WHERE nombre NOT LIKE "Ciudad%" ORDER BY autonoma_desde ASC LIMIT 1;
 +------------+----------------+
 | nombre     | autonoma_desde |
@@ -200,7 +200,7 @@ SELECT nombre, autonoma_desde FROM provincias WHERE nombre NOT LIKE "Ciudad%" OR
 | Corrientes | 1814-04-20     |
 +------------+----------------+
 
-/*14. Dar la superficie total de la Argentina*/
+/*26. Dar la superficie total de la Argentina*/
 SELECT SUM(superficie) AS Superficie_Total FROM  provincias ;
 +------------------+
 | Superficie_Total |
@@ -208,7 +208,7 @@ SELECT SUM(superficie) AS Superficie_Total FROM  provincias ;
 |          2780403 |
 +------------------+
 
-/*15. Dar la población total de la Argentina */
+/*27. Dar la población total de la Argentina */
 SELECT SUM(poblacion) AS Poblacion_Total FROM  provincias ;
 +-----------------+
 | Poblacion_Total |
@@ -216,7 +216,7 @@ SELECT SUM(poblacion) AS Poblacion_Total FROM  provincias ;
 |        45376763 |
 +-----------------+
 
-/* 16. Listar todas las provincias indicando: nombre, superficie y porcentaje de superficie total del país que ocupa.*/
+/* 28. Listar todas las provincias indicando: nombre, superficie y porcentaje de superficie total del país que ocupa.*/
 SELECT nombre, superficie, (superficie * 100) / 2780403 AS Porcentaje_Superficie_Total FROM provincias ORDER BY Porcentaje_Superficie_Total ;
 +-------------------------------------------------------+------------+-----------------------------+
 | nombre                                                | superficie | Porcentaje_Superficie_Total |
