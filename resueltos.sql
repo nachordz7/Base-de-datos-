@@ -248,7 +248,8 @@ SELECT nombre, superficie, (superficie * 100) / 2780403 AS Porcentaje_Superficie
 +-------------------------------------------------------+------------+-----------------------------+
 
 /* 29. Listar las provincias autónomas desde el siglo XIX.*/
-SELECT nombre, autonoma_desde FROM provincias WHERE autonoma_desde BETWEEN '1800-01-01' AND '1899-12-31' ;
+SELECT nombre, autonoma_desde FROM provincias WHERE autonoma_desde BETWEEN '1801-01-01' AND '1900-12-31' ;
+SELECT nombre, autonoma_desde FROM provincias WHERE YEAR(autonoma_desde) BETWEEN 1801 AND 1900;
 +---------------------+----------------+
 | nombre              | autonoma_desde |
 +---------------------+----------------+
@@ -423,3 +424,101 @@ SELECT nombre, fecha_fund FROM equipos ORDER BY fecha_fund ASC LIMIT 1;
 SELECT nombre, estadio FROM equipos WHERE estadio LIKE "%Armando%";
 
 /* 41.Mostrar la fila correspondiente a la materia con id 4. */
+SELECT * FROM materias WHERE id = 4 ;
++----+--------+-------+-------------+------------+-------------+----------+
+| id | nombre | curso | esp         | cant_horas | contraturno | rotacion |
++----+--------+-------+-------------+------------+-------------+----------+
+|  4 | Taller |     3 | Computacion |          9 |           1 | Redes    |
++----+--------+-------+-------------+------------+-------------+----------+
+
+/* 42. Mostrar los nombres de todas las materias de quinto automotores.*/
+SELECT nombre FROM materias WHERE curso = 5;
+
+/*43. Mostrar los nombres de los equipos fundados en el siglo XX */
+SELECT nombre FROM equipos WHERE fecha_fund > 1901 AND fecha_fund < 2000;
+SELECT nombre FROM equipos WHERE YEAR(fecha_fund) BETWEEN 1901 AND 2000;
++-------------+
+| nombre      |
++-------------+
+| Newells     |
+| Ferro       |
+| Estudiantes |
++-------------+
+
+/*44. Mostrar todas las materias de segundo año exceptuando las rotaciones de Taller.*/
+SELECT * FROM materias WHERE curso=2 AND rotacion NOT LIKE "Taller";
+
+/*45. Mostrar la cantidad total de socios entre todos los equipos de la Argentina.*/
+SELECT SUM(cant_socios) AS cantidad_total FROM equipos;
++----------------+
+| cantidad_total |
++----------------+
+|         142713 |
++----------------+
+
+/*46. Mostrar todas las materias que se dictan a contraturno.*/
+SELECT * FROM materias WHERE contraturno = 1;
++----+------------+-------+-------------+------------+-------------+----------+
+| id | nombre     | curso | esp         | cant_horas | contraturno | rotacion |
++----+------------+-------+-------------+------------+-------------+----------+
+|  1 | Algoritmos |     4 | Computacion |          9 |           1 | NULL     |
+|  4 | Taller     |     3 | Computacion |          9 |           1 | Redes    |
++----+------------+-------+-------------+------------+-------------+----------+
+
+/*47. Mostrar la cantidad total de horas por semana que tiene un alumno de cuarto computación.*/
+SELECT SUM(cant_horas) FROM materias WHERE curso = 4 AND esp LIKE "computacion";
++-----------------+
+| SUM(cant_horas) |
++-----------------+
+|              13 |
++-----------------+
+
+/*48. Mostrar nombre de equipo y ciudad de los equipos cuyo nombre comience con “Estudiantes”.¨*/
+SELECT nombre, ciudad FROM equipos WHERE ciudad LIKE "Estudiantes%";
+
+/*49. Mostrar los equipos del Nacional B*/
+SELECT * FROM equipos WHERE division = "Nacional B";
++----+--------+-------------------------------+--------------+------------+-------------+------------+-------------+
+| id | nombre | estadio                       | ciudad       | fecha_fund | cant_socios | division   | campeonatos |
++----+--------+-------------------------------+--------------+------------+-------------+------------+-------------+
+|  2 | Ferro  | Arquitecto Ricardo Etcheverri | Buenos Aires | 1904-07-28 |       14000 | Nacional B |           2 |
++----+--------+-------------------------------+--------------+------------+-------------+------------+-------------+
+
+/*50. Mostrar el equipo con más socios */
+SELECT nombre, cant_socios FROM equipos ORDER BY cant_socios DESC LIMIT 1 ;
++-------------+-------------+
+| nombre      | cant_socios |
++-------------+-------------+
+| Estudiantes |       50000 |
++-------------+-------------+
+
+/*51. Mostrar todas las rotaciones de taller de primer año.*/
+SELECT rotacion FROM materias WHERE rotacion = "taller" AND curso = 1;
+
+/*52. Dar una lista de todos los equipos ordenados del más viejo al más nuevo.*/
+SELECT nombre,fecha_fund FROM equipos ORDER BY fecha_fund ASC;
++-------------+------------+
+| nombre      | fecha_fund |
++-------------+------------+
+| Gimnasia    | 1887-06-03 |
+| Banfield    | 1896-01-21 |
+| Newells     | 1903-11-03 |
+| Ferro       | 1904-07-28 |
+| Estudiantes | 1905-08-04 |
++-------------+------------+
+
+/*53. Mostrar la fila correspondiente al equipo con id 8.*/
+SELECT * FROM equipos WHERE id = 8;
+
+/*54. Mostrar los nombres de todas las materias de sexto computación*/
+SELECT nombre FROM materias WHERE curso = 6 AND esp = "computacion";
+
+/*55. Mostrar nombre y cantidad de horas de las materias con 2, 3 o 4 horas.*/
+SELECT nombre, cant_horas FROM materias WHERE cant_horas = 2 OR cant_horas = 3 OR cant_horas = 4 ;
++------------+------------+
+| nombre     | cant_horas |
++------------+------------+
+| Biologia   |          2 |
+| Matematica |          4 |
+| Lengua     |          3 |
++------------+------------+
