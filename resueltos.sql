@@ -296,35 +296,38 @@ SELECT capital FROM provincias WHERE nombre IN( "Mendoza", "San Juan","San Luis"
 +----------+
 
 /* 33. Dar una lista con todas las provincias indicando hace cuantos años son autónomas.*/
-SELECT nombre, autonoma_desde FROM provincias;
-+-------------------------------------------------------+----------------+
-| nombre                                                | autonoma_desde |
-+-------------------------------------------------------+----------------+
-| Buenos Aires                                          | 1820-02-11     |
-| Catamarca                                             | 1821-08-25     |
-| Chaco                                                 | 1951-08-08     |
-| Chubut                                                | 1955-06-15     |
-| Cordoba                                               | 1820-01-05     |
-| Corrientes                                            | 1814-04-20     |
-| Entre Rios                                            | 1814-04-23     |
-| Formosa                                               | 1955-06-15     |
-| Jujuy                                                 | 1836-12-17     |
-| La Pampa                                              | 1951-08-08     |
-| La Rioja                                              | 1820-03-01     |
-| Mendoza                                               | 1820-03-01     |
-| Misiones                                              | 1953-12-10     |
-| Neuquen                                               | 1955-06-15     |
-| Rio Negro                                             | 1955-06-15     |
-| Salta                                                 | 1836-12-17     |
-| San Juan                                              | 1820-03-01     |
-| San Luis                                              | 1820-03-01     |
-| Santa Cruz                                            | 1956-11-22     |
-| Santa Fe                                              | 1816-05-10     |
-| Santiago del Estero                                   | 1820-04-27     |
-| Tierra del Fuego, Antartida e Islas del Atlantico Sur | 1990-04-26     |
-| Tucuman                                               | 1825-11-25     |
-| Ciudad Autonoma de Buenos Aires                       | 1536-02-02     |
-+-------------------------------------------------------+----------------+
+SELECT
+    nombre,
+    TIMESTAMPDIFF(YEAR, autonoma_desde, CURDATE()) AS años_autonoma
+FROM provincias;
++-------------------------------------------------------+---------------+
+| nombre                                                | anos_autonoma |
++-------------------------------------------------------+---------------+
+| Buenos Aires                                          |           205 |
+| Catamarca                                             |           203 |
+| Chaco                                                 |            73 |
+| Chubut                                                |            69 |
+| Cordoba                                               |           205 |
+| Corrientes                                            |           211 |
+| Entre Rios                                            |           210 |
+| Formosa                                               |            69 |
+| Jujuy                                                 |           188 |
+| La Pampa                                              |            73 |
+| La Rioja                                              |           205 |
+| Mendoza                                               |           205 |
+| Misiones                                              |            71 |
+| Neuquen                                               |            69 |
+| Rio Negro                                             |            69 |
+| Salta                                                 |           188 |
+| San Juan                                              |           205 |
+| San Luis                                              |           205 |
+| Santa Cruz                                            |            68 |
+| Santa Fe                                              |           208 |
+| Santiago del Estero                                   |           204 |
+| Tierra del Fuego, Antartida e Islas del Atlantico Sur |            34 |
+| Tucuman                                               |           199 |
+| Ciudad Autonoma de Buenos Aires                       |           489 |
++-------------------------------------------------------+---------------+
 
 /*34. Listar las 23 provincias de la Argentina anteponiendo ”Provincia de ”. Por ejemplo en vez de escribir ”Buenos
 Aires” debe decir ”Provincia de Buenos Aires”.*/
@@ -522,3 +525,113 @@ SELECT nombre, cant_horas FROM materias WHERE cant_horas = 2 OR cant_horas = 3 O
 | Matematica |          4 |
 | Lengua     |          3 |
 +------------+------------+
+
+/*56. Mostrar la cantidad total de horas por semana que tiene un alumno de sexto automotores.*/
+SELECT COUNT(cant_horas) AS cantidad_total, curso FROM materias WHERE curso = 6 AND esp LIKE "automotores";
+
+/*57. Mostrar nombre y cantidad de horas de las materias con menos de 4 horas semanales.*/
+SELECT nombre, cant_horas FROM materias WHERE cant_horas < 4;
++----------+------------+
+| nombre   | cant_horas |
++----------+------------+
+| Biologia |          2 |
+| Lengua   |          3 |
++----------+------------+
+
+/*58. Buscar el nombre y apellido del alumno con DNI 50123456*/
+SELECT nombre, apellido FROM alumnos WHERE dni= 50123456;
+
+/*59. Buscar los jugadores que se llamen “Leonel” o “Lionel”.*/
+SELECT nombre FROM jugadores WHERE nombre LIKE "Leonel" OR nombre LIKE "Lionel";
++--------+
+| nombre |
++--------+
+| Leonel |
++--------+
+
+/*60. Buscar el delantero más joven indicando nombre, apellido y altura.*/
+SELECT nombre, apellido, altura, edad FROM jugadores ORDER BY edad ASC LIMIT 1;
++---------+----------+--------+------+
+| nombre  | apellido | altura | edad |
++---------+----------+--------+------+
+| Brahian | Aleman   |    178 |   32 |
++---------+----------+--------+------+
+
+/*61. Listar todos los equipos de Primera División que no sean de CABA*/
+SELECT nombre, ciudad FROM equipos WHERE division LIKE "Primera" AND ciudad NOT LIKE "Ciudad%";
++-------------+----------+
+| nombre      | ciudad   |
++-------------+----------+
+| Newells     | Rosario  |
+| Banfield    | Banfield |
+| Estudiantes | La Plata |
+| Gimnasia    | La Plata |
++-------------+----------+
+
+/*62. Buscar todos los alumnos de apellido Gonzalez que estén en el ciclo básico.*/
+SELECT apellido, curso FROM alumnos WHERE apellido LIKE "Gonzalez" AND curso = 1;
+
+/*63. Dar una lista de las materias de computación que se dictan a contraturno.*/
+SELECT nombre FROM materias WHERE esp LIKE "computacion" AND contraturno = 1;
++------------+
+| nombre     |
++------------+
+| Algoritmos |
+| Taller     |
++------------+
+
+/*64. Dar una lista de los equipos del Nacional B que sean de CABA o que tengan al menos un campeonato.*/
+SELECT nombre, ciudad, division, campeonatos FROM equipos WHERE  division LIKE "Nacional B" AND (ciudad LIKE "Ciudad%"  OR campeonatos >= 1);
++--------+--------------+------------+-------------+
+| nombre | ciudad       | division   | campeonatos |
++--------+--------------+------------+-------------+
+| Ferro  | Buenos Aires | Nacional B |           2 |
++--------+--------------+------------+-------------+
+
+/*65. Indicar nombre, apellido y posición de los diez jugadores más altos*/
+ SELECT nombre, apellido, altura pos FROM jugadores ORDER BY altura DESC limit 10;
++---------+-----------+------+
+| nombre  | apellido  | pos  |
++---------+-----------+------+
+| Mariano | Andujar   |  194 |
+| Brahian | Aleman    |  178 |
+| Leonel  | Vangioni  |  177 |
+| Dario   | Cvitanich |  172 |
++---------+-----------+------+
+
+/*66. Dar la lista de alumnos de cuarto tercera computación ordenada por apellido y nombre.*/
+SELECT nombre, apellido, curso, esp FROM alumnos WHERE curso = 4 AND esp = "Computacion" ORDER BY apellido, nombre ASC;
++--------+----------+-------+-------------+
+| nombre | apellido | curso | esp         |
++--------+----------+-------+-------------+
+| Juan   | Gonzalez |     4 | Computacion |
+| Jorge  | Perez    |     4 | Computacion |
++--------+----------+-------+-------------+
+
+Ejercicios aparte
+1. Agregar 3 equipos de futbol del Nacional B.
+  
+2. Agregar los datos que faltan de Boca.
+  
+3. Actualizar los valores de los gobernadores.
+  
+4. Agregar Uruguay a la tabla Provincias.
+  
+5. Restarle el 10% de la poblacion a todas las provincias de CUYO por el terremoto.
+  
+6. Borrar la provincia de Cordoba ya que se independizo.
+  
+7. Eliminar todos los clubes con menos de 500 socios.
+  
+8. Agregar un campeonato a Newells.
+
+12. El vendedor con id 55 le cede todas sus ventas al vendedor con id 99.
+  
+13. Modificar la tabla personas para que todos los DNI que son impares sean pares. No modificar los DNI que ya son pares.
+  
+14. Agregar una columna precio a la tabla autos. Ponerle precio a los autos según la siguiente fórmula: 1000000 −10000(𝑎 − 𝑎0), 
+  donde 𝑎 es el año de la fecha de hoy y 𝑎0 es el año de fabricación.
+  
+17. Aumentar un 28% el sueldo a todos los cajeros de las sucursales de Rawson (sucursales 24 y 32).
+
+23. Dar de baja todos los Peugeot de autos.
