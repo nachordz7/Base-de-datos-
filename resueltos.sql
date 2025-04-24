@@ -610,28 +610,97 @@ SELECT nombre, apellido, curso, esp FROM alumnos WHERE curso = 4 AND esp = "Comp
 
 Ejercicios aparte
 1. Agregar 3 equipos de futbol del Nacional B.
-  
+  INSERT INTO equipos VALUES
+    (6,'All Boys','Islas Malvinas','CABA','1913-03-15',5000,'Nacional B',3),
+    (7,'Arsenal','Estadio Julio Humberto Grondona','Avellaneda','1957-01-11',3000,'Nacional B',5),
+    (8,'Chicago','Estadio República de Mataderos','CABA','1911-07-01',1400,'Nacional B',1);
+
 2. Agregar los datos que faltan de Boca.
-  
+  INSERT INTO equipos VALUES
+    (9,'Boca Juniors','Estadio Alberto José Armando','CABA','1905-04-03',323586,'Primera',22);
+
 3. Actualizar los valores de los gobernadores.
-  
+  UPDATE provincias 
+    SET gobernador = 'Leandro Zdero' WHERE id = 3;
+
+UPDATE provincias 
+    SET gobernador = 'Ignacio Torres' WHERE id = 4;
+
+UPDATE provincias 
+    SET gobernador = 'Martín Llaryora' WHERE id = 5;
+
+UPDATE provincias 
+    SET gobernador = 'Rogelio Frigerio' WHERE id = 7;
+
+UPDATE provincias 
+    SET gobernador = 'Carlos Sadir' WHERE id = 9;
+
+UPDATE provincias 
+    SET gobernador = 'Sergio Ziliotto' WHERE id = 10;
+
+UPDATE provincias 
+    SET gobernador = 'Alfredo Cornejo' WHERE id = 12;
+
+UPDATE provincias 
+    SET gobernador = 'Hugo Passalacqua' WHERE id = 13;
+
+UPDATE provincias 
+    SET gobernador = 'Rolando Figueroa' WHERE id = 14;
+
+UPDATE provincias 
+    SET gobernador = 'Alberto Weretilneck' WHERE id = 15;
+
+UPDATE provincias 
+    SET gobernador = 'Marcelo Orrego' WHERE id = 17;
+
+UPDATE provincias 
+    SET gobernador = 'Claudio Poggi' WHERE id = 18;
+
+UPDATE provincias 
+    SET gobernador = 'Claudio Vidal' WHERE id = 19;
+
+UPDATE provincias 
+    SET gobernador = 'Maximiliano Pullaro' WHERE id = 20;
+
+UPDATE provincias 
+    SET gobernador = 'Osvaldo Jaldo' WHERE id = 23;
+
+UPDATE provincias 
+    SET gobernador = 'Jorge Macri' WHERE id = 24;
+   
 4. Agregar Uruguay a la tabla Provincias.
-  
+  INSERT INTO provincias VALUES
+    (25,'Uruguay','Montevideo','Mauricio Zunino',1319108,530,'1825-07-25');
+
 5. Restarle el 10% de la poblacion a todas las provincias de CUYO por el terremoto.
-  
+  UPDATE provincias
+    SET poblacion = poblacion - ( poblacion * 0.1)
+    WHERE nombre IN('Mendoza','San Luis','San Juan');
+    
 6. Borrar la provincia de Cordoba ya que se independizo.
-  
+ DELETE FROM provincias WHERE nombre = 'Cordoba'; 
+    
 7. Eliminar todos los clubes con menos de 500 socios.
+    DELETE FROM equipos WHERE cant_socios < 500;
   
 8. Agregar un campeonato a Newells.
+    UPDATE equipos 
+    SET campeonatos = campeonatos + 1
+    WHERE nombre = "Newells";
 
 12. El vendedor con id 55 le cede todas sus ventas al vendedor con id 99.
+    
   
 13. Modificar la tabla personas para que todos los DNI que son impares sean pares. No modificar los DNI que ya son pares.
+    
   
 14. Agregar una columna precio a la tabla autos. Ponerle precio a los autos según la siguiente fórmula: 1000000 −10000(𝑎 − 𝑎0), 
   donde 𝑎 es el año de la fecha de hoy y 𝑎0 es el año de fabricación.
+    ALTER TABLE
+    ADD COLUMN
   
 17. Aumentar un 28% el sueldo a todos los cajeros de las sucursales de Rawson (sucursales 24 y 32).
+    
 
 23. Dar de baja todos los Peugeot de autos.
+    DELETE FROM autos WHERE marca = "Peugeot";
