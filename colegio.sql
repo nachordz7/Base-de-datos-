@@ -37,3 +37,20 @@ CREATE TABLE telefonos(
     tel INT NOT NULL,
     FOREIGN KEY (alumno) REFERENCES alumnos(dni)
 ); 
+
+
+/*cosas nuevas*/
+
+CREATE TABLE profesores (
+cuil INT PRYMARY KEY, 
+dni INT UNIQUE, 
+mail VARCHAR (60) UNIQUE, 
+tel INT, 
+nombre VARCHAR(60) NN, 
+apellido VARCHAR(60) NN, 
+f_nac DATE, 
+turnos VARCHAR(50) NN
+);
+
+ALTER TABLE materias ADD COLUMN profesor INT;
+ALTER TABLE materias ADD FOREIGN KEY (profesor) REFERENCES profesores (cuil);
