@@ -9,24 +9,23 @@ CREATE TABLE alumnos(
     fecha_nac date NOT NULL, 
     curso INT NOT NULL,
     division INT NOT NULL,
-    especialidad VARCHAR(60) NOT NULL
-);
+    especialidad  ENUM('automotores','computacion','ciclo basico') DEFAULT 'ciclo basico' NOT NULL
 
 CREATE TABLE materias(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombres VARCHAR(60) NOT NULL,
-    horas INT NOT NULL,
-    ano INT NOT NULL,
-    especialidad VARCHAR(60) NOT NULL
+    horas TYNYINT NOT NULL,
+    ano TYNYINT NOT NULL,
+    especialidad ENUM('automotores','computacion','ciclo basico') DEFAULT 'ciclo basico' NOT NULL
 );
 
 CREATE TABLE notas(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    alumno INT(8) NOT NULL,
+    alumno INT NOT NULL,
     materia INT NOT NULL,
-    tipo_calificacion VARCHAR(60) NOT NULL,
-    nota INT NOT NULL, 
-    fecha_carga DATE NOT NULL,
+    tipocalificacion ENUM('1c', '2c, 'F') NOT NULL,
+    nota TYNYINT NOT NULL, 
+    fechacarga TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (alumno) REFERENCES alumnos(dni),
     FOREIGN KEY (materia) REFERENCES materias(id)
 );
