@@ -23,7 +23,7 @@ CREATE TABLE notas(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     alumno INT NOT NULL,
     materia INT NOT NULL,
-    tipocalificacion ENUM('1c', '2c, 'F') NOT NULL,
+    tipocalificacion ENUM('1c', '2c', 'F') NOT NULL,
     nota TYNYINT NOT NULL, 
     fechacarga TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (alumno) REFERENCES alumnos(dni),
