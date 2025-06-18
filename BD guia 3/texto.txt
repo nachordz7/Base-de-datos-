@@ -1,0 +1,8 @@
+1. Dar un comando para ver todas las bases de datos en el servidor de MySQL/MariaDB
+
+2. Nombrar tres tipos de datos distintos en MySQL
+
+3. Crear una tabla para representar entradas en la guía telefónica. Usar las siguientes columnas: nombre, apellido,
+teléfono, calle, altura y localidad.
+
+4.
