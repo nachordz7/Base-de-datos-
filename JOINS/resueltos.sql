@@ -33,3 +33,12 @@ JOIN clientes AS cl ON cl.id = co.cliente
 JOIN ciudades AS ci ON ci.id = cl.localidad;
 
 /*10*/
+
+
+
+/*11*/
+SELECT CONCAT(UPPER(cl.apellido), ', ', cl.nombre)
+SUM(precio * cant) AS 'total gastado'
+FROM compras AS co
+JOIN clientes AS cl.id = co.cliente
+JOIN productos AS p.id = co.producto;
