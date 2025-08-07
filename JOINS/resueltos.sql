@@ -27,5 +27,9 @@ SELECT SUM(c.cant) AS biromes_azules_vendidos FROM compras AS c
 /*8*/
 
 /*9. Indicar para cada compra el id de compra y la dirección de envío.*/
+SELECT co.id, cl.calle, cl.altura, ci.nombre
+FROM compras AS co 
+JOIN clientes AS cl ON cl.id = co.cliente
+JOIN ciudades AS ci ON ci.id = cl.localidad;
 
 /*10*/
