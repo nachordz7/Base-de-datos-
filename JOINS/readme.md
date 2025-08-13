@@ -1,0 +1,9 @@
+- GROUP BY
+- HAVING
+- ORDER BY
+- CONCAT()
+- UPPER()
+- SUM()
+- COUNT()
+- IN
+  
