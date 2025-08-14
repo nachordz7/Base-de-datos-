@@ -71,6 +71,10 @@ el domicilio indicando: calle, altura, localidad y provincia.*/
 
 /*15. Indicar nombre de provincia y poblacion total de sus ciudades para la tabla ciudades. Mostrar solamente las
 provincias que sumen más de un millón de habitantes.*/
+SELECT p.nombre AS provincia, SUM(c.poblacion) AS total_poblacion FROM provincias AS p 
+JOIN ciudades AS c ON c.provincia = p.id
+GROUP BY p. id 
+HAVING  SUM(c.poblacion) > 1000000;
 
 /*16. Mostrar las compras de Juan Perez ordenadas por fecha. Indicar artículo, precio, cantidad y total de la compra.*/
 
