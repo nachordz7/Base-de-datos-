@@ -85,3 +85,9 @@ HAVING  SUM(c.poblacion) > 1000000;
 /*19. Listar las regiones del país que no lleguen a tres millones de habitantes.*/
 
 /*20. Mostrar las compras de menos de mil pesos en un listado como el del ejercicio 10*/
+
+/*24. Buscar las regiones del país con cuatro o más provincias.*/
+SELECT region, COUNT(*) AS cantidad_provincias
+FROM provincias
+GROUP BY region
+HAVING COUNT(*) >= 4;
