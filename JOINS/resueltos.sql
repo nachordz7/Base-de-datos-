@@ -91,3 +91,8 @@ SELECT region, COUNT(*) AS cantidad_provincias
 FROM provincias
 GROUP BY region
 HAVING COUNT(*) >= 4;
+
+
+/*32. Dar la cantidad de materias aprobadas para cada alumno, indicando DNI, nombre, apellido y cantidad de materiasaprobada*/
+SELECT a.dni, a.nombre, a.apellido, COUNT(*) AS cant_materias_aprobadas
+
