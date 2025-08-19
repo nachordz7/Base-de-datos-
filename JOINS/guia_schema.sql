@@ -20,6 +20,17 @@ CREATE TABLE alumnos(
   curso INT,
   esp ENUM('Automotores', 'Computacion', 'Ciclo basico')
 );
+
+
+CREATE TABLE notas (
+id INT PRIMARY KEY AUTO_INCREMENT,
+alumno INT,
+materia INT,
+nota INT,
+FOREIGN KEY (alumno) REFERENCES alumnos(id),
+FOREIGN KEY (materia) REFERENCES materias(id)
+);
+
 CREATE TABLE jugadores(
   id INT PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(255),
