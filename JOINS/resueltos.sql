@@ -92,7 +92,89 @@ FROM provincias
 GROUP BY region
 HAVING COUNT(*) >= 4;
 
+/*25. Buscar las ciudades de la provincia de Santa Fe con más de quinientos mil habitantes.*/
+SELECT c.nombre, c.poblacion FROM ciudades AS c 
+  JOIN provincias AS p ON c.provincia = p.id
+  WHERE p.nombre = "Santa Fe" AND c.poblacion > 500000; 
 
-/*32. Dar la cantidad de materias aprobadas para cada alumno, indicando DNI, nombre, apellido y cantidad de materiasaprobada*/
+/*26. ¿Cuántas resmas A4 se vendieron?*/
+SELECT SUM(c.cant), p.descripcion FROM compras AS c
+  JOIN productos AS p ON c.producto = p.id 
+  WHERE p.descripcion = "Resma A4";
+
+/*27. Indicar el total gastado en cada compra.*/
+SELECT c.id AS id_compra, SUM(c.cant * p.precio) AS gasto_total FROM compras AS c
+  JOIN productos AS p ON c.producto = p.id
+  GROUP BY c.id;
+
+/*28. Indicar para cada compra el id de compra y la dirección de envío.*/
+SELECT c.id, CONCAT(cl.calle, ' ', cl.altura, ', ', ci.nombre) AS Direccion_de_envio FROM compras AS c
+  JOIN clientes AS cl ON c.cliente = cl.id
+  JOIN ciudades AS ci ON cl.localidad = ci.id 
+  ORDER BY c.id ASC ;
+
+/*29. ¿En qué equipo juega Sebastián Villa?*/
+SELECT e.nombre FROM equipos AS e 
+  JOIN jugadores AS j ON j.equipo = e.id
+  WHERE j.nombre = "Sebastian Villa";
+
+/*30. Dar una lista de todos los jugadores en equipos rosarinos indicando nombre, apellido y posición.*/
+SELECT j.nombre, j.apellido, j.pos FROM jugadores AS j 
+  JOIN equipos AS e ON e.id = j.equipo 
+  WHERE e.ciudad = "Rosario";
+
+/*31. Dar la lista de materias pendientes (no aprobadas) del alumno con DNI 40123456.*/
+SELECT m.nombre FROM alumnos AS a
+  JOIN notas AS n ON a.id = n.alumno
+  JOIN materias AS m ON n.materia = m.id
+  WHERE a.dni = '40123456' AND n.nota < 6;
+
+/*32. Dar la cantidad de materias aprobadas para cada alumno, indicando DNI, nombre, apellido y cantidad de materias
+aprobada*/
 SELECT a.dni, a.nombre, a.apellido, COUNT(*) AS cant_materias_aprobadas
 
+/*33. Dar una lista con los arqueros de cada equipo de primera división indicando nombre de equipo, nombre, apellido
+y altura.*/
+SELECT e.nombre, j.nombre, j.apellido, j.altura  FROM jugadores AS j
+  JOIN equipos AS e ON e.id = j.equipo 
+  WHERE j.pos = "ARQ" AND e.division = "Primera";
+
+/*34. Buscar el arquero más alto de primera división.*/
+SELECT j.nombre, j.altura FROM jugadores j
+  JOIN equipos AS e ON e.id = j.equipo
+  WHERE e.division = "Primera" AND j.pos = "ARQ" ORDER BY j.altura DESC LIMIT 1 ;
+
+/*35. Buscar los delanteros de Ferro indicando nombre, apellido y edad. Ordenarlos del más joven al más viejo.*/
+
+/*36. Crear un listado de partidos indicando local y visitante y cruzando todos los equipos entre sí.*/
+
+/*37. Contar cuántos equipos de fútbol hay por cada ciudad.*/
+
+/*38. Sumar los campeonatos de los equipos de fútbol por ciudad.*/
+
+/*39. Mostrar la compra promedio por cliente indicando nombre y apellido del cliente.*/
+
+/*40. Mostrar la altitud promedio de las ciudades de cada provincia, ordenar por nombre de provincia.*/
+
+/*41. Contar la cantidad de materias por año, discriminando en el caso de tercero a sexto año entre computación y
+automotores.*/
+
+/*42. Crear un listado con la nota final de cada materia para cada alumno. La nota final es el promedio de todas las
+notas parciales. Indicar nombre y apellido del alumno y nombre de la materia.*/
+
+/*43. Agregar al listado anterior el curso y la especialidad.*/
+
+/*44. Buscar el delantero más joven del Nacional B.*/
+
+/*45. Mostrar todas las ciudades de la provincia de Buenos Aires con más de cien mil habitantes.*/
+
+/*46. Indicar la ciudad más antigua por región de la Argentina.*/
+
+/*47. Mostrar las materias cuya nota final sea menor a 6 y tengan 4 horas o más de Pedro García.*/
+
+/*48. Dar una lista indicando la cantidad de jugadores que tiene cada equipo.*/
+
+/*49. Indicar fecha, hora, producto y nombre del cliente que hizo la compra más cara.*/
+
+/*50. Buscar el jugador más viejo del equipo más viejo. Indicar nombre de equipo, fecha de fundación, nombre del
+jugador y edad.*/
