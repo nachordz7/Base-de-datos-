@@ -17,6 +17,12 @@ INSERT INTO materias VALUES
   (NULL,'Taller',3,'Computacion',9,1,'Redes'),
   (NULL,'Lengua',4,'Automotores',3,0,NULL);
 
+INSERT INTO notas (id, alumno, materia, nota) VALUES
+(1, 1, 1, 10),
+(2, 2, 1, 5),
+(3, 2, 2, 2),
+(4, 3, 2, 7);
+
 INSERT INTO equipos VALUES
   (NULL,'Newells','Marcelo Bielsa','Rosario','1903-11-03',37993,'Primera',6),
   (NULL,'Ferro','Arquitecto Ricardo Etcheverri','Buenos Aires','1904-07-28',14000,'Nacional B',2),
