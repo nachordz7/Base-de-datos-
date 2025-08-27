@@ -153,8 +153,10 @@ SELECT CONCAT(j.nombre, ' ',j.apellido), j.edad FROM jugadores j
 SELECT e1.nombre AS equipo_local, e2.nombre AS equipo_visitante FROM equipos e1
   JOIN equipos e2 ON e1.id <> e2.id
   ORDER BY equipo_local, equipo_visitante;
-/*37. Contar cuántos equipos de fútbol hay por cada ciudad.*/
 
+/*37. Contar cuántos equipos de fútbol hay por cada ciudad.*/
+SELECT e.ciudad, COUNT(*) FROM equipos AS e
+  GROUP BY e.ciudad;
 /*38. Sumar los campeonatos de los equipos de fútbol por ciudad.*/
 
 /*39. Mostrar la compra promedio por cliente indicando nombre y apellido del cliente.*/
