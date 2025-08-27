@@ -145,9 +145,14 @@ SELECT j.nombre, j.altura FROM jugadores j
   WHERE e.division = "Primera" AND j.pos = "ARQ" ORDER BY j.altura DESC LIMIT 1 ;
 
 /*35. Buscar los delanteros de Ferro indicando nombre, apellido y edad. Ordenarlos del más joven al más viejo.*/
+SELECT CONCAT(j.nombre, ' ',j.apellido), j.edad FROM jugadores j
+  JOIN equipos AS e ON e.id = j.equipo
+  WHERE e.nombre = 'Ferro' AND j.pos = 'DEL';
 
 /*36. Crear un listado de partidos indicando local y visitante y cruzando todos los equipos entre sí.*/
-
+SELECT e1.nombre AS equipo_local, e2.nombre AS equipo_visitante FROM equipos e1
+  JOIN equipos e2 ON e1.id <> e2.id
+  ORDER BY equipo_local, equipo_visitante;
 /*37. Contar cuántos equipos de fútbol hay por cada ciudad.*/
 
 /*38. Sumar los campeonatos de los equipos de fútbol por ciudad.*/
