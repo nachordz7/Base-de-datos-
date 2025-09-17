@@ -79,6 +79,11 @@ HAVING  SUM(c.poblacion) > 1000000;
 /*16. Mostrar las compras de Juan Perez ordenadas por fecha. Indicar artículo, precio, cantidad y total de la compra.*/
 
 /*17. Buscar el nombre y apellido de los clientes que viven en Santa Fe o Cordoba.*/
+SELECT cl.nombre, cl.apellido, p.nombre AS provincia
+FROM clientes AS cl
+JOIN ciudades AS c ON cl.localidad = c.id
+JOIN provincias AS p ON c.provincia = p.id
+WHERE p.nombre = 'Santa Fe' OR p.nombre = 'Cordoba';
 
 /*18. Dar el total de población para cada región de la Argentina.*/
 
